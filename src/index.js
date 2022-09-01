@@ -4,10 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css'; 
+import RootStore, {StoreProvider} from './RootStore';
+ 
+const store = new RootStore();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <StoreProvider store={store}>
     <App />
+    </StoreProvider>
   </React.StrictMode>
 );
 
