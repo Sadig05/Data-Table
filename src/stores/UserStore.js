@@ -1,5 +1,5 @@
 import { runInAction, makeAutoObservable, reaction } from "mobx";
-import userService from "./service";
+import userService from "../services/service"
 
 class UserStore {
   users = [];

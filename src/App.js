@@ -1,8 +1,6 @@
 import { Table, Input, Button, Space } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useStore } from "./RootStore";
+import { useStore } from "./stores/RootStore";
 import { observer } from "mobx-react";
 
 const columns = (setFilter) => [

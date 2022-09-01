@@ -7,7 +7,7 @@ export class RootStore {
   constructor() {
     makeAutoObservable(this);
     this.userStore = new UserStore();
-    this.userStore.getUsers();
+    this.userStore.getUsers(); 
   }
 }
 
