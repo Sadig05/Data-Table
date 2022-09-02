@@ -22,7 +22,7 @@ const columns = (setFilter) => [
             value={selectedKeys[0]}
             onChange={(e) => {
               setSelectedKeys(e.target.value ? [e.target.value] : []);
-              confirm({ closeDropdown: false });
+              // confirm({ closeDropdown: false });
             }}
             onPressEnter={() => {
               confirm();
@@ -116,7 +116,7 @@ function App() {
     if (e.action == "paginate") {
       userStore.setFilters({
         _page: pagination.current,
-        _limit: 10,
+        _limit: pagination.pageSize,
       });
     }
     if (e.action == "filter") {
@@ -124,10 +124,10 @@ function App() {
       const parsedFilter = {};
       preParse.forEach(([key, value]) => {
         if (Array.isArray(value) && key !== "gender") {
-          console.log(parsedFilter)
+          console.log(parsedFilter);
           return (parsedFilter[key] = value[0]);
-        }parsedFilter[key] = value;
-
+        }
+        parsedFilter[key] = value;
       });
       console.log(parsedFilter);
 
@@ -138,15 +138,22 @@ function App() {
     }
   };
 
+  function onShowSizeChange(current, pageSize){
+    console.log(current, pageSize);
+  }
+
+  console.log(Math.ceil(userStore.count / 10))
+
   return (
     <div className="App">
       <Table
+       onShowSizeChange= {onShowSizeChange}
         pagination={{
-          pageSize: 10,
-          total: Math.ceil(userStore.count / 10),
-          size: userStore.users,
+          total: userStore.count,
+          pageSizeOptions: ["10", "50", "100"],
           showSizeChanger: true,
-          pageSizeOptions: ["10", "20", "30"],
+          
+      
         }}
         columns={columns()}
         rowKey={"id"}

@@ -5,7 +5,7 @@ class UserStore {
   users = [];
   filters = { _page: 1, _limit: 10 };
   status = "inital";
-  count;
+  count = 0;
   constructor() {
     this.userService = new userService();
     makeAutoObservable(this);
@@ -21,6 +21,7 @@ class UserStore {
       const { data, headers } = await this.userService.getData(this.filters);
       console.log(this.filters[0]);
       const totalCount = parseInt(headers["x-total-count"]);
+      console.log(totalCount);
       runInAction(() => {
         this.users = data;
         this.count = totalCount;
